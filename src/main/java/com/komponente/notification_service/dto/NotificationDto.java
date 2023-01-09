@@ -11,18 +11,18 @@ public class NotificationDto {
     private String subject;
     private String text;
     private String username;
-    private String hotelName;
+    private String companyName;
 
     public NotificationDto(){
 
     }
 
-    public NotificationDto(String recipient, String subject, String username, String hotelName) {
+    public NotificationDto(String recipient, String subject, String username, String companyName) {
         this.recipient = recipient;
         this.subject = subject;
         this.username = username;
-        this.hotelName = hotelName;
-        this.text = NotificationTypes.getMail(subject, username, hotelName);
+        this.companyName = companyName;
+        this.text = NotificationTypes.getMail(subject, username, companyName);
     }
 
 }

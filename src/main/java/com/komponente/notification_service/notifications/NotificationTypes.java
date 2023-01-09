@@ -11,13 +11,13 @@ public class NotificationTypes {
     public static final String MANAGER_RESERVATION_CONFIRMED = "Manager Reservation Confirmed";
     public static final String MANAGER_RESERVATION_CANCELLED = "Manager Reservation Cancelled";
 
-    public static String getMail(String type, String username, String hotelName){
+    public static String getMail(String type, String username, String companyName){
         return switch (type) {
             case ACCOUNT_ACTIVATION -> "Successfully registered, username: " + username;
             case PASSWORD_RESET -> "Successfully changed your password";
-            case RESERVATION_CONFIRMED -> "Successfully made a reservation at hotel: " + hotelName;
-            case RESERVATION_CANCELLED -> "Successfully cancelled your reservation at hotel: " + hotelName;
-            case RESERVATION_REMINDER -> "Reminder: Your reservation at hotel: " + hotelName + " is in two days";
+            case RESERVATION_CONFIRMED -> "Successfully made a reservation: " + companyName;
+            case RESERVATION_CANCELLED -> "Successfully cancelled your reservation: " + companyName;
+            case RESERVATION_REMINDER -> "Reminder: Your reservation: " + companyName + " is in three days";
             case MANAGER_RESERVATION_CANCELLED -> "User: " + username + " has cancelled a reservation at your hotel";
             case MANAGER_RESERVATION_CONFIRMED -> "User: " + username + " has made a reservation at your hotel";
             default -> "";
