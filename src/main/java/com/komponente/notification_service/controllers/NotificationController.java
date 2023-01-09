@@ -4,7 +4,7 @@ package com.komponente.notification_service.controllers;
 import com.komponente.notification_service.notifications.Notification;
 import com.komponente.notification_service.notifications.NotificationRepo;
 import com.komponente.notification_service.security.CheckSecurity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @SuppressWarnings("all")
-
+@AllArgsConstructor
 @RestController
 @RequestMapping("/notifications")
 public class NotificationController {
-
-    @Autowired
     private NotificationRepo notificationRepo;
 
 

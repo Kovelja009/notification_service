@@ -1,15 +1,17 @@
 package com.komponente.notification_service.notifications;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.Instant;
 
 @Getter
+@Setter
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 public class Notification {
 
     @Id
@@ -18,13 +20,10 @@ public class Notification {
     private String recipient;
     private String type;
     private Instant createdAt = Instant.now();
-//    private Instant lastModified;
+    private Instant lastModified;
 
     public Notification(String recipient, String type) {
         this.recipient = recipient;
         this.type = type;
     }
-
-    public Notification() {}
-
 }
