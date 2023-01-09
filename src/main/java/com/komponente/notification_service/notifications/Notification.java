@@ -7,9 +7,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.Instant;
 
+@Getter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Getter
 public class Notification {
 
     @Id
@@ -18,7 +18,7 @@ public class Notification {
     private String recipient;
     private String type;
     private Instant createdAt = Instant.now();
-    private Instant lastModified;
+//    private Instant lastModified;
 
     public Notification(String recipient, String type) {
         this.recipient = recipient;

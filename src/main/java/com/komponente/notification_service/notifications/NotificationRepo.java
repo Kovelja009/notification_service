@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository
 public interface NotificationRepo extends JpaRepository<Notification, Long> {
     List<Notification> findByType(String type);
     List<Notification> findByRecipient(String recipient);
