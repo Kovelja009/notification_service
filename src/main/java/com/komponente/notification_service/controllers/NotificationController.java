@@ -1,8 +1,9 @@
 package com.komponente.notification_service.controllers;
 
 
-import com.komponente.notification_service.notifications.Notification;
-import com.komponente.notification_service.notifications.NotificationRepo;
+import com.komponente.notification_service.model.Notification;
+import com.komponente.notification_service.repositories.NotificationRepo;
+import com.komponente.notification_service.repositories.TypeRepo;
 import com.komponente.notification_service.security.CheckSecurity;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("/notifications")
 public class NotificationController {
     private NotificationRepo notificationRepo;
-
+    private TypeRepo typeRepo;
 
     @GetMapping(value = "/get")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
@@ -26,7 +27,7 @@ public class NotificationController {
         try{
             if(notificationType == null)
                return new ResponseEntity<>(notificationRepo.findAll(), HttpStatus.OK);
-            return new ResponseEntity<>(notificationRepo.findByType(notificationType), HttpStatus.OK);
+            return new ResponseEntity<>(notificationRepo.findByType(typeRepo.findByType(notificationType)), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }

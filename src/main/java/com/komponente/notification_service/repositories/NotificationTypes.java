@@ -1,6 +1,14 @@
-package com.komponente.notification_service.notifications;
+package com.komponente.notification_service.repositories;
 
-
+/*
+String fs;
+fs = String.format("The value of the float " +
+                   "variable is %f, while " +
+                   "the value of the " +
+                   "integer variable is %d, " +
+                   " and the string is %s",
+                   floatVar, intVar, stringVar);
+ */
 public class NotificationTypes {
     
     public static final String ACCOUNT_ACTIVATION = "Account Activation";

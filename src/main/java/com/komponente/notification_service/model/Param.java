@@ -12,14 +12,10 @@ public class Param {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Boolean firstName;
-    private Boolean lastName;
-
-    private Boolean company;
-    private Boolean username;
-    private Boolean model;
-
-    private Boolean link;
-
-
+    private String firstName;
+    private String lastName;
+    private String company;
+    private String username;
+    private String model;
+    private String link;
 }
