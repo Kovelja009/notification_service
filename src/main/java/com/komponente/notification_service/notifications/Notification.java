@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.Instant;
 
 @Getter
@@ -22,8 +22,4 @@ public class Notification {
     private Instant createdAt = Instant.now();
     private Instant lastModified;
 
-    public Notification(String recipient, String type) {
-        this.recipient = recipient;
-        this.type = type;
-    }
 }

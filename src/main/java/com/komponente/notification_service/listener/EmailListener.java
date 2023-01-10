@@ -35,31 +35,31 @@ public class EmailListener {
     public void saveNotification(Message message) throws JMSException {
         ActivationMailDTO notificationDto = messageHelper.getMessage(message, ActivationMailDTO.class);
         emailService.sendSimpleMessage(notificationDto.getEmail(), notificationDto.getFirstName(), notificationDto.getActivationLink());
-        Notification notification = new Notification(notificationDto.getEmail(), notificationDto.getFirstName());
-        notificationRepo.save(notification);
+//        Notification notification = new Notification(notificationDto.getEmail(), notificationDto.getFirstName());
+//        notificationRepo.save(notification);
     }
 
     @JmsListener(destination = "reservation-confirmation", concurrency = "5-10")
     public void reservationConfirmation(Message message) throws JMSException{
         NotificationDto notificationDto = messageHelper.getMessage(message, NotificationDto.class);
         emailService.sendSimpleMessage(notificationDto.getRecipient(), notificationDto.getSubject(), notificationDto.getText());
-        Notification notification = new Notification(notificationDto.getRecipient(), notificationDto.getSubject());
-        notificationRepo.save(notification);
+//        Notification notification = new Notification(notificationDto.getRecipient(), notificationDto.getSubject());
+//        notificationRepo.save(notification);
     }
 
     @JmsListener(destination = "reservation-cancelled", concurrency = "5-10")
     public void reservationCancelled(Message message) throws JMSException{
         NotificationDto notificationDto = messageHelper.getMessage(message, NotificationDto.class);
         emailService.sendSimpleMessage(notificationDto.getRecipient(), notificationDto.getSubject(), notificationDto.getText());
-        Notification notification = new Notification(notificationDto.getRecipient(), notificationDto.getSubject());
-        notificationRepo.save(notification);
+//        Notification notification = new Notification(notificationDto.getRecipient(), notificationDto.getSubject());
+//        notificationRepo.save(notification);
     }
 
     @JmsListener(destination = "password-change", concurrency = "5-10")
     public void passwordChange(Message message) throws JMSException{
         NotificationDto notificationDto = messageHelper.getMessage(message, NotificationDto.class);
         emailService.sendSimpleMessage(notificationDto.getRecipient(), notificationDto.getSubject(), notificationDto.getText());
-        Notification notification = new Notification(notificationDto.getRecipient(), notificationDto.getSubject());
-        notificationRepo.save(notification);
+//        Notification notification = new Notification(notificationDto.getRecipient(), notificationDto.getSubject());
+//        notificationRepo.save(notification);
     }
 }
