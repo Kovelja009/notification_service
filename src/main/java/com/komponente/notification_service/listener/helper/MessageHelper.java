@@ -2,9 +2,9 @@ package com.komponente.notification_service.listener.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.jms.*;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
+import javax.jms.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.springframework.stereotype.Component;
 

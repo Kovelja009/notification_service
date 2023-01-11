@@ -1,8 +1,10 @@
 package com.komponente.notification_service.mapper;
 
 import com.komponente.notification_service.dto.NotificationDto;
+import com.komponente.notification_service.dto.TypeDto;
 import com.komponente.notification_service.model.Notification;
 import com.komponente.notification_service.model.Param;
+import com.komponente.notification_service.model.Type;
 import com.komponente.notification_service.repositories.TypeRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,7 +25,13 @@ public class ObjectMapper {
     }
 
     public Notification notificationFromNotificationDto(NotificationDto dto){
-        return new Notification(typeRepo.findByType(dto.getSubject()),paramFromNotificationDto(dto),dto.getRecipient(),dto.getText());
+        return new Notification(typeRepo.findByType(dto.getSubject()).get(),paramFromNotificationDto(dto),dto.getRecipient(),dto.getText());
+    }
+    public TypeDto typeToTypeDto(Type type){ return new TypeDto(type.getType());}
+    public Type typeDtoToType(TypeDto dto){
+        Type type = new Type();
+        type.setType(dto.getType());
+        return type;
     }
 
 

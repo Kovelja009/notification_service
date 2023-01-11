@@ -16,4 +16,19 @@ public class NotificationDto {
     private String username;
     private String model;
     private String link;
+
+    @Override
+    public String toString() {
+        return "NotificationDto{" +
+                "recipient='" + recipient + '\'' +
+                ", subject='" + subject + '\'' +
+                ", text='" + text + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", company='" + company + '\'' +
+                ", username='" + username + '\'' +
+                ", model='" + model + '\'' +
+                ", link='" + link + '\'' +
+                '}';
+    }
 }
