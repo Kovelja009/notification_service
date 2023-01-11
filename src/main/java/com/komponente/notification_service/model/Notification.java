@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 
-//@Entity
+@Entity
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
