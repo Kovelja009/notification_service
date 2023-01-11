@@ -26,6 +26,7 @@ public class EmailListener {
 
     @JmsListener(destination = "${destination.activationMail}", concurrency = "5-10")
     public void saveNotification(Message message) throws JMSException {
+        System.out.println("EmailListener: saveNotification");
         NotificationDto notificationDto = messageHelper.getMessage(message, NotificationDto.class);
         Notification notification = objectMapper.notificationFromNotificationDto(notificationDto);
         emailService.sendSimpleMessage(notification.getRecipient(), notification.getType().getType(), notification.getText());

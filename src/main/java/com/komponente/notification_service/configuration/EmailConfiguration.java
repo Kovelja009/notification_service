@@ -17,7 +17,10 @@ public class EmailConfiguration {
         mailSender.setPort(587);
 
         mailSender.setUsername("rentcar123service@gmail.com");
-        mailSender.setPassword("adminadmin123");
+        mailSender.setPassword("fxkibhfvyyvtresi"); // windows
+//        mailSender.setPassword("lnvqcatuwynacaaw"); // mac
+//                "adminadmin123 <- original
+
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
