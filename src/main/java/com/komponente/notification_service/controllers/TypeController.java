@@ -32,15 +32,15 @@ public class TypeController {
 
 
     @GetMapping(value = "/get")
-    public ResponseEntity<?> getAll(@RequestHeader(value = "authorization",required = false) String token){
+    public ResponseEntity<?> getAll(@RequestHeader("Authorization") String authorization){
         try{
                 return new ResponseEntity<>(typeRepo.findAll(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> deleteOne(@RequestHeader(value = "authorization",required = false) String token, @PathVariable Long id){
+    @DeleteMapping
+    public ResponseEntity<?> deleteOne(@RequestHeader("Authorization") String authorization, @PathVariable Long id){
         try{
             try{
                 Type notification = typeRepo.findById(id).get();
