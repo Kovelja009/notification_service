@@ -33,8 +33,29 @@ public class EmailListener {
     @JmsListener(destination = "${destination.activationMail}", concurrency = "5-10")
     public void saveNotification(Message message) throws JMSException {
         System.out.println("EmailListener: saveNotification"+message);
-        NotificationDto notificationDto = messageHelper.getMessage(message, NotificationDto.class);
-        System.out.println(notificationDto);
+        sendMail(messageHelper.getMessage(message, NotificationDto.class));
+
+    }
+
+    @JmsListener(destination = "${destination.reservationMail}", concurrency = "5-10")
+    public void reservationConfirmation(Message message) throws JMSException{
+        System.out.println("EmailListener: saveNotification"+message);
+        sendMail(messageHelper.getMessage(message, NotificationDto.class));
+    }
+
+    @JmsListener(destination = "${destination.cancelledMail}", concurrency = "5-10")
+    public void reservationCancelled(Message message) throws JMSException{
+        System.out.println("EmailListener: saveNotification"+message);
+        sendMail(messageHelper.getMessage(message, NotificationDto.class));
+    }
+
+    @JmsListener(destination = "${destination.passwordMail}", concurrency = "5-10")
+    public void passwordChange(Message message) throws JMSException{
+        System.out.println("EmailListener: saveNotification"+message);
+        sendMail(messageHelper.getMessage(message, NotificationDto.class));
+    }
+
+    public void sendMail(NotificationDto notificationDto){
         Notification notification = objectMapper.notificationFromNotificationDto(notificationDto);
         Param param= notification.getParam();
         if(paramService.findByParam(param)==null)
@@ -49,31 +70,6 @@ public class EmailListener {
             System.out.println(notification.getType().getType());
             System.out.println( notification.getText());
         }
-
-        notificationRepo.save(notification);
-    }
-
-    @JmsListener(destination = "${destination.reservationMail}", concurrency = "5-10")
-    public void reservationConfirmation(Message message) throws JMSException{
-        NotificationDto notificationDto = messageHelper.getMessage(message, NotificationDto.class);
-        Notification notification = objectMapper.notificationFromNotificationDto(notificationDto);
-        emailService.sendSimpleMessage(notification.getRecipient(), notification.getType().getType(), notification.getText());
-        notificationRepo.save(notification);
-    }
-
-    @JmsListener(destination = "${destination.cancelledMail}", concurrency = "5-10")
-    public void reservationCancelled(Message message) throws JMSException{
-        NotificationDto notificationDto = messageHelper.getMessage(message, NotificationDto.class);
-        Notification notification = objectMapper.notificationFromNotificationDto(notificationDto);
-        emailService.sendSimpleMessage(notification.getRecipient(), notification.getType().getType(), notification.getText());
-        notificationRepo.save(notification);
-    }
-
-    @JmsListener(destination = "${destination.passwordMail}", concurrency = "5-10")
-    public void passwordChange(Message message) throws JMSException{
-        NotificationDto notificationDto = messageHelper.getMessage(message, NotificationDto.class);
-        Notification notification = objectMapper.notificationFromNotificationDto(notificationDto);
-        emailService.sendSimpleMessage(notification.getRecipient(), notification.getType().getType(), notification.getText());
         notificationRepo.save(notification);
     }
 }
