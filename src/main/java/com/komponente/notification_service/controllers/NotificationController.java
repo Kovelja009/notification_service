@@ -20,14 +20,11 @@ public class NotificationController {
     private NotificationRepo notificationRepo;
     private TypeRepo typeRepo;
 
-    @GetMapping(value = "/get")
-//    @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<?> getAll(@RequestHeader(value = "authorization",required = false) String token,
-                                    @RequestHeader(value = "notification-type", required = false) String notificationType){
+    @GetMapping
+    @CheckSecurity(roles = {"ROLE_ADMIN"})
+    public ResponseEntity<?> getAll(@RequestHeader(value = "authorization",required = false) String token){
         try{
-            if(notificationType == null)
                return new ResponseEntity<>(notificationRepo.findAll(), HttpStatus.OK);
-            return new ResponseEntity<>(notificationRepo.findByType(typeRepo.findByType(notificationType).get()), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -20,7 +20,7 @@ public class TypeController {
     private TypeService typeService;
     private TypeRepo typeRepo;
     @PostMapping("/add")
-    //@CheckSecurity(roles = {"ROLE_ADMIN"})
+    @CheckSecurity(roles = {"ROLE_ADMIN"})
     public ResponseEntity<TypeDto> addType(@RequestBody @Valid TypeDto typeDto) {
         return new ResponseEntity<>(typeService.addType(typeDto), HttpStatus.OK);
     }
@@ -34,17 +34,17 @@ public class TypeController {
     @GetMapping(value = "/get")
     public ResponseEntity<?> getAll(@RequestHeader("Authorization") String authorization){
         try{
-                return new ResponseEntity<>(typeRepo.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(typeRepo.findAll(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @DeleteMapping
-    public ResponseEntity<?> deleteOne(@RequestHeader("Authorization") String authorization, @PathVariable Long id){
+    @CheckSecurity(roles = {"ROLE_ADMIN"})
+    public ResponseEntity<?> deleteOne(@RequestHeader("Authorization") String authorization, @RequestParam @Valid String type){
         try{
             try{
-                Type notification = typeRepo.findById(id).get();
-                typeRepo.deleteById(notification.getId());
+                typeService.deleteType(type);
                 return new ResponseEntity<>("Successfully deleted notification", HttpStatus.OK);
             }catch (NoSuchElementException e){return new ResponseEntity<>("No such notification",HttpStatus.BAD_REQUEST);}
 

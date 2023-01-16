@@ -29,16 +29,20 @@ public class Scheduler {
 
 //    ResponseEntity<UserDto> userDto =  userServiceRestTemplate.exchange("/user/id?id="+reviewCreateDto.getUserId().toString(), HttpMethod.GET, null, UserDto.class);
 
-    @Scheduled(fixedRate = 900_000)
+    @Scheduled(fixedRate = 90)
     public void sendReservationReminder(){
         try {
-            ResponseEntity<List<NotificationDto>> notificationsDto =  reservationServiceRestTemplate.exchange("/reservation/remind", HttpMethod.GET, null, new ParameterizedTypeReference<List<NotificationDto>>() {});
+
+            ResponseEntity<List<NotificationDto>> notificationsDto =  reservationServiceRestTemplate.exchange("http://localhost:8081/api/reservation/remind", HttpMethod.GET, null, new ParameterizedTypeReference<List<NotificationDto>>() {});
+            System.out.println(notificationsDto.getBody());
             List<NotificationDto> notificationDtos = notificationsDto.getBody();
+
             if(notificationDtos==null)
                 return;
             for(NotificationDto not:notificationDtos){
                 emailListener.sendMail(not);
             }
+
 //            List<Notification> notifications = notificationsDto.getBody().stream().map(objectMapper::notificationFromNotificationDto).collect(Collectors.toList());
 //            for(Notification notification:notifications){
 //                emailService.sendSimpleMessage(notification.getRecipient(), notification.getType().getType(), notification.getText());

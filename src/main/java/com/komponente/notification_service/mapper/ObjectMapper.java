@@ -25,6 +25,7 @@ public class ObjectMapper {
     }
 
     public Notification notificationFromNotificationDto(NotificationDto dto){
+        System.out.println(dto.getSubject());
         return new Notification(typeRepo.findByType(dto.getSubject()).get(),paramFromNotificationDto(dto),dto.getRecipient(),dto.getText());
     }
     public TypeDto typeToTypeDto(Type type){ return new TypeDto(type.getType());}
