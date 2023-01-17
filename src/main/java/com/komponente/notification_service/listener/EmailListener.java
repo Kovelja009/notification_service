@@ -57,6 +57,7 @@ public class EmailListener {
 
     public void sendMail(NotificationDto notificationDto){
         Notification notification = objectMapper.notificationFromNotificationDto(notificationDto);
+
         Param param= notification.getParam();
         if(paramService.findByParam(param)==null)
             paramsRepo.save(param);
