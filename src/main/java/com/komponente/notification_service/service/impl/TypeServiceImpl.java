@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -47,6 +48,9 @@ public class TypeServiceImpl implements TypeService {
     public void deleteType(String typee) {
         Optional<Type> type = typeRepo.findByType(typee);
         type.ifPresent(value -> typeRepo.deleteById(value.getId()));
+        if(!type.isPresent()){
+            throw new NoSuchElementException();
+        }
 
     }
 

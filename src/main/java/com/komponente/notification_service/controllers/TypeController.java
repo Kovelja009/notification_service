@@ -21,7 +21,8 @@ public class TypeController {
     private TypeRepo typeRepo;
     @PostMapping("/add")
     @CheckSecurity(roles = {"ROLE_ADMIN"})
-    public ResponseEntity<TypeDto> addType(@RequestBody @Valid TypeDto typeDto) {
+    public ResponseEntity<TypeDto> addType(@RequestHeader("Authorization") String authorization,@RequestBody @Valid TypeDto typeDto) {
+
         return new ResponseEntity<>(typeService.addType(typeDto), HttpStatus.OK);
     }
     @GetMapping("/")
